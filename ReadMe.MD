@@ -1,1 +1,1 @@
-Processing Accelerometry Data
+Processing Accelerometry Data and EDA Data
