@@ -1,4 +1,8 @@
-# Code to compute AI for files
+# Code to compute AI for files #
+## ---- Please place this file in a folder named "methods" 
+##      under the directory where the AI data is stored. ----
+
+## Recent update: Feb 22, 2021, by Xinrui Wu
 
 library(tidyverse)
 library(lubridate)
