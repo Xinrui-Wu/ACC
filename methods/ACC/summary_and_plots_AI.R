@@ -29,6 +29,11 @@ for (i in 1:n_obs){
   id = 1000 + i 
   input_name = paste0("./", id, "_AI.rds")
   
+  ## check the progress of the loop##
+  if (i%%10 == 0){
+    print(i)
+  }
+  
   if (file.exists(input_name)){
     acc_ai = readRDS(input_name)
     summary_AI[i, 'ID'] = id
