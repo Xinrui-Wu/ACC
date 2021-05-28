@@ -118,7 +118,7 @@ for (i in 1:n_obs){
     num_devices = rbind(num_devices, temp)
   }
 }
-saveRDS(num_devices, file = './methods/num_devices.rds')
+saveRDS(num_devices, file = './methods/summary_data/num_devices.rds')
 
 table(num_devices$num_device)
 
