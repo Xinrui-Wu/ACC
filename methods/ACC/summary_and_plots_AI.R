@@ -76,7 +76,7 @@ none_ind = none_ind[-1]
 if(length(none_ind) > 0) {summary_AI = summary_AI[-none_ind,]}
 
 saveRDS(summary_AI, file = './methods/summary_data/summary_AI.rds')
-saveRDS(all_pause, file = './methods/summary_data/pauses.rds')
+saveRDS(all_pause, file = './methods/summary_data/pauses_AI.rds')
 
 # summary of pause time for each observation
 summary_pause = all_pause %>%
@@ -86,11 +86,11 @@ summary_pause = all_pause %>%
             num_30min_to_1day = sum(pause_num > 0 & pause >= 30*60 & pause < 60*60*24),
             num_more_than_1day = sum(pause_num > 0 & pause >= 60*60*24), 
             num_total = sum(pause_num > 0))
-saveRDS(summary_pause, file = './methods/summary_data/summary_pause.rds')
+saveRDS(summary_pause, file = './methods/summary_data/summary_pause_AI.rds')
 
 
 ## ---------- Frequency of missing AI data in the 30 minuetes before button presses ---------- ##
-all_pause = readRDS('./methods/summary_data/pauses.rds')
+all_pause = readRDS('./methods/summary_data/pauses_AI.rds')
 
 time_with_miss_30min = transmute(all_pause, ID, pause_num, period) %>%
   mutate(time_with_miss = period * (period <= 30*60 & pause_num > 0) + 
@@ -123,7 +123,7 @@ for (i in 1:n_obs){
     num_devices = rbind(num_devices, temp)
   }
 }
-saveRDS(num_devices, file = './methods/summary_data/num_devices.rds')
+saveRDS(num_devices, file = './methods/summary_data/num_devices_AI.rds')
 
 table(num_devices$num_device)
 
@@ -131,7 +131,7 @@ table(num_devices$num_device)
 
 
 ## ------------------ Plots ------------------ ##
-## AI ##
+## summary of AI ##
 #### Histogram of AI mean ####
 hist(summary_AI$AI_mean, breaks = 25, axes = F, xlab = '', ylab = '', 
      main = 'Histogram of mean(AI) across Observations')
@@ -194,7 +194,7 @@ dev.off()
 
 
 
-## pause time ##
+## summary of pause time ##
 #### boxplot ####
 hist(all_pause$pause)
 boxplot((pause/3600)~ID, data = all_pause, ylab='Pause Time / hour')
